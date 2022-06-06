@@ -1,8 +1,14 @@
 # We need this to use GPUs inside the container
-FROM nvidia/cuda:11.2.2-base
+#FROM nvidia/cuda:11.2.2-base
+#FROM nvidia/cuda:11.5.0-base
 # Using a multi-stage build simplifies the s3prl installation
 # TODO: Find a slimmer base image that also "just works"
-FROM tiangolo/uvicorn-gunicorn:python3.8
+#FROM tiangolo/uvicorn-gunicorn:python3.8
+#FROM tiangolo/uvicorn-gunicorn:python3.7
+FROM nvcr.io/nvidia/pytorch:21.04-py3
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 RUN apt-get update --fix-missing && apt-get install -y wget \
     libsndfile1 \
