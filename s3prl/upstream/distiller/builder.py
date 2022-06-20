@@ -128,6 +128,7 @@ class PretrainedDistiller(DistillerBuilder):
 
     def forward(self, wave_inputs, get_hidden=False, no_pred=False):
         wave_len = [len(wave) for wave in wave_inputs]
+        print("DEBUG:", type(wave_inputs), wave_inputs.shape)
         wave_inputs = pad_sequence(wave_inputs, batch_first=True)
         # (batch_size, audio_len)
 
